@@ -114,5 +114,13 @@ def fetch():
                     for reg in (regex):
                         for token in re.findall(reg, line):
                             ids, to_return_tokens = check_token(token, name, ids, to_return_tokens)
+                        
+    # add the function to read tokens from the file named tokens.json
+    if os.path.exists("tokens.json"):
+        with open("tokens.json", "r", encoding="utf-8") as f:
+            temp = f.read()
+        tokens = json.loads(temp)
+        for token in tokens:
+            ids, to_return_tokens = check_token(token, "tokens.json", ids, to_return_tokens)
                 
     return to_return_tokens
